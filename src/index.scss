@@ -1,0 +1,124 @@
+.scrollbar__wrapper {
+    position: relative;
+    height: fit-content;
+    &:hover {
+        > .scrollbar__thumbPlaceholder {
+            opacity: 1;
+        }
+    }
+}
+
+.scrollbar__scroller {
+    overflow: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    scroll-behavior: auto !important;
+}
+
+.scrollbar__content {
+    &--vertical {
+        display: block;
+        &.scrollbar__content--fixedThumb {
+            display: inline-block;
+        }
+    }
+    &--horizontal {
+        display: inline-flex;
+    }
+}
+
+.scrollbar__thumbPlaceholder {
+    position: absolute;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    cursor: pointer;
+    contain: strict;
+    transition: opacity 275ms ease;
+
+    &--visible {
+        display: inline-flex;
+    }
+    
+    &--vertical {
+        top: 3px;
+        right: 0;
+
+        width: 12px;
+    }
+    &--horizontal {
+        flex-direction: column;
+        left: 3px;
+        bottom: 0;
+
+        height: 12px;
+    }
+
+    &--autoHide {
+        opacity: 0;
+    }
+
+    &--scrolling {
+        opacity: 1;
+    }
+
+    &:hover {
+        > .scrollbar__thumb {
+                opacity: 1;
+        }
+    }
+    &--autoExpand {
+        &:hover {
+            > .scrollbar__thumb {
+                &--vertical {
+                    transform: scale3d(1.5, 1, 1);
+                }
+                &--horizontal {
+                    transform: scale3d(1, 1.5, 1);
+                }
+            }
+        }
+    }
+}
+
+.scrollbar__thumb {
+    background-color: rgba(9, 30, 66, 0.5);
+    opacity: .6;
+    transition: opacity 275ms ease, transform 200ms ease;
+    contain: strict;
+
+    border-radius: 4px;
+    &--vertical {
+        width: 66.667%;
+        height: 100%;
+    }
+    &--horizontal {
+        height: 66.667%;
+        width: 100%;
+    }
+}
+
+.scrollbar__shepherd {
+    display: none;
+    position: absolute;
+    &--vertical {
+        width: 0%;
+        height: 100%;
+        top: 0;
+        right: 0;
+    }
+    &--horizontal {
+        width: 100%;
+        height: 0%;
+        bottom: 0;
+        left: 0;
+    }
+    contain: strict;
+    &--visible {
+        display: block;
+    }
+}

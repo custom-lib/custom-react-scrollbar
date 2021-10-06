@@ -1,0 +1,28 @@
+.operation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 16px;
+    user-select: none   ;
+}
+
+.operation_btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background-color: #E3EDF7;
+    box-shadow: -4px -2px 16px #FFFFFF, 4px 2px 16px rgba(136, 165, 191, 0.48);
+    text-decoration: none;
+    cursor: pointer;
+    transition: box-shadow 300ms ease;
+    &:hover {
+        box-shadow: inset -3px -3px 7px #FFFFFF, inset 3px 3px 7px rgba(136, 165, 191, 0.48);
+    }
+
+    & + & {
+        margin-left: 24px;
+    }
+}
