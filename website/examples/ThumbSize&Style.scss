@@ -1,0 +1,49 @@
+.operation_input {
+    all: unset;
+    margin-right: 20px;
+
+    width: 120px;
+    height: 40px;
+    border-radius: 12px;
+    border: 1px solid;
+    border-image-source: linear-gradient(130.18deg, #FFFFFF 35.92%, rgba(55, 83, 111, 0.4) 190.57%);
+
+    background-color: #E3EDF7;
+    box-shadow: inset -3px -3px 7px #FFFFFF, inset 2px 2px 5px rgba(136, 165, 191, 0.38);
+    &:hover, &:focus {
+        border-image: linear-gradient(136.4deg, #FFFFFF -105.81%, rgba(55, 83, 111, 0.4) 188.83%);
+    }
+
+    outline: none;
+    -webkit-appearance: none;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none !important;
+        margin: 0; 
+    }
+    -moz-appearance: textfield;
+}
+
+.customCls {
+    .scrollbar__thumbPlaceholder--horizontal {
+        height: 24px;
+    }
+    .scrollbar__thumbPlaceholder--autoExpand:hover > .scrollbar__thumb {
+        border-radius: 12px;
+    }
+
+    .scrollbar__thumb {
+        background: linear-gradient( 135deg, #52E5E7 10%, #130CB7 100%);
+        border-radius: 8px;
+    }
+
+
+    .scrollbar__thumbPlaceholder--vertical {
+        width: 80px;
+    }
+    .scrollbar__thumb.scrollbar__thumb--vertical {
+        background: url('../assets/Rem.jpg');
+        background-size: contain;
+        background-repeat: repeat-y;
+    }
+}
