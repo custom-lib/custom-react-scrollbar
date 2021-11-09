@@ -1,15 +1,17 @@
 import clsx from 'clsx';
 import { clamp } from 'lodash-es';
-import React, { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState, forwardRef, PropsWithChildren } from 'react';
 import './index.scss';
 import type { ThumbMethods } from './Thumb';
 import Thumb from './Thumb';
 import type { Rect } from './useMeasure';
 import useMeasure from './useMeasure';
+import composeRef from './composeRef';
+
 export type { Rect } from './useMeasure';
 export { useMeasure };
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface Props extends React.ComponentProps<'div'> {
     contentClassName?: string;
     contentStyle?: React.CSSProperties;
     /** Set major scroll direction.Will auto set the scroll container element display to 'horizontal' -> 'inline-flex' / 'vertical' -> 'block'('inline-block' if fixedThumb). */
@@ -28,8 +30,8 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
     onContentResize?: (rect: Rect) => void;
 }
 
-const CustomScrollbar: React.FC<Props> = memo(
-    ({
+const CustomScrollbar = forwardRef<HTMLDivElement, PropsWithChildren<Props>>
+    (({
         children,
         className,
         contentClassName,
@@ -48,7 +50,7 @@ const CustomScrollbar: React.FC<Props> = memo(
         onContentResize,
         onScroll,
         ...nativeProps
-    }) => {
+    }, _forwardRef) => {
         /** Batch render Thumbs.Get the Thumb element and then set transform, autoHide onScroll. */
         const thumbs = useRef<Record<'horizontal' | 'vertical', { el: HTMLElement; methods: ThumbMethods }>>({
             horizontal: { el: null as unknown as HTMLElement, methods: null as unknown as ThumbMethods },
@@ -177,7 +179,7 @@ const CustomScrollbar: React.FC<Props> = memo(
         return (
             <div className="scrollbar__wrapper">
                 <div
-                    ref={wrapperEl}
+                    ref={composeRef(wrapperEl, _forwardRef)}
                     {...nativeProps}
                     className={clsx('scrollbar__scroller', className)}
                     onScroll={simulateScroll ? undefined : handleScroll}
@@ -212,7 +214,7 @@ const CustomScrollbar: React.FC<Props> = memo(
                 ))}
             </div>
         );
-    },
+    }
 );
 
 export default CustomScrollbar;

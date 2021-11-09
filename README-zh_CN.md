@@ -32,14 +32,21 @@ import 'custom-react-scrollbar/dist/style.css';
 
 ## 基础用法
 
-像使用原生滚动容器一样给它设置一个固定的尺寸即可。
+像使用原生滚动容器一样给它设置一个固定的尺寸即可。原生的滚动api可以通过ref直接使用。
 
 ```javascript
-<CustomScrollbar style={{ width: '500px', height: '300px' }}>
-    <div style={{ width: '1000px', height: '600px' }}>
-        Some great content...
-    </div>
-</CustomScrollbar>
+function xxx() {
+    const scrollEl = useRef<HTMLDivElement>(null!);
+    const handleClickScrollToTop = useCallback(() => scrollEl.current.scrollTo({ top: 0, behavior: 'smooth' }), []);
+
+    return (
+        <CustomScrollbar style={{ width: '500px', height: '300px' }} ref={scrollEl}>
+            <div style={{ width: '1000px', height: '600px' }}>
+                Some great content...
+            </div>
+        </CustomScrollbar>
+    );
+}
 ```
 
 ### Props

@@ -33,14 +33,21 @@ import 'custom-react-scrollbar/dist/style.css';
 
 ## Basic Usage
 
-Just give it a fixed size like using a native scroll container.
+Just give it a fixed size like using a native scroll container.The native scrolling api can be used directly via ref.
 
 ```javascript
-<CustomScrollbar style={{ width: '500px', height: '300px' }}>
-    <div style={{ width: '1000px', height: '600px' }}>
-        Some great content...
-    </div>
-</CustomScrollbar>
+function xxx() {
+    const scrollEl = useRef<HTMLDivElement>(null!);
+    const handleClickScrollToTop = useCallback(() => scrollEl.current.scrollTo({ top: 0, behavior: 'smooth' }), []);
+
+    return (
+        <CustomScrollbar style={{ width: '500px', height: '300px' }} ref={scrollEl}>
+            <div style={{ width: '1000px', height: '600px' }}>
+                Some great content...
+            </div>
+        </CustomScrollbar>
+    );
+}
 ```
 
 
