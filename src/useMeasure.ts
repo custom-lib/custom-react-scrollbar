@@ -27,7 +27,7 @@ const defaultOption = {
 export default function useMeasure<T extends Element | SVGSVGElement = any>(ref: MutableRefObject<T>, option?: Option): Rect;
 export default function useMeasure<T extends Element | SVGSVGElement = any>(option?: Option): readonly [MutableRefObject<T>, Rect];
 export default function useMeasure<T extends Element | SVGSVGElement = any>(...args: any) {
-    const hasParamRef = 'current' in args?.[0];
+    const hasParamRef = args?.[0] && 'current' in args?.[0];
     let option: Option | undefined;
     if (hasParamRef) option = args?.[1];
     else option = args?.[0];
@@ -36,6 +36,7 @@ export default function useMeasure<T extends Element | SVGSVGElement = any>(...a
     const [rect, setRect] = useState(() => ({ left: 0, top: 0, right: 0, bottom: 0, width: 0, height: 0, x: 0, y: 0 }))
     
     const observerFunc = useCallback(() => {
+        if (!targetRef.current) return;
         const domRect = targetRef.current.getBoundingClientRect();
         setRect({
             left: domRect.left,
