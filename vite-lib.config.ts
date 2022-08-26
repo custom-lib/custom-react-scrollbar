@@ -1,26 +1,13 @@
-import reactRefresh from '@vitejs/plugin-react-refresh';
-import ts2 from 'rollup-plugin-typescript2';
-import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts'
+import { visualizer } from 'rollup-plugin-visualizer';
 
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [
-        reactRefresh(),
-        {
-            ...ts2({
-                check: true,
-                tsconfig: './tsconfig.json',
-                tsconfigOverride: {
-                    compilerOptions: {
-                        sourceMap: false,
-                        declaration: true,
-                        declarationMap: false,
-                    },
-                },
-            }),
-            enforce: 'pre',
-        },
+        react(),
+        dts()
     ],
     build: {
         target: 'esnext',
