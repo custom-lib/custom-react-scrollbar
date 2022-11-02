@@ -12,6 +12,8 @@ export type { Rect } from './useMeasure';
 export { useMeasure };
 
 interface Props extends React.ComponentProps<'div'> {
+    wrapperClassName?: string;
+    wrapperStyle?: React.CSSProperties;
     contentClassName?: string;
     contentStyle?: React.CSSProperties;
     /** Set major scroll direction.Will auto set the scroll container element display to 'horizontal' -> 'inline-flex' / 'vertical' -> 'block'('inline-block' if fixedThumb). */
@@ -34,6 +36,8 @@ const CustomScrollbar = forwardRef<HTMLDivElement, PropsWithChildren<Props>>
     (({
         children,
         className,
+        wrapperClassName,
+        wrapperStyle,
         contentClassName,
         contentStyle,
         direction = 'vertical',
@@ -177,7 +181,7 @@ const CustomScrollbar = forwardRef<HTMLDivElement, PropsWithChildren<Props>>
         }, []);
 
         return (
-            <div className="scrollbar__wrapper">
+            <div className={clsx("scrollbar__wrapper", wrapperClassName)} style={wrapperStyle}>
                 <div
                     ref={composeRef(wrapperEl, _forwardRef)}
                     {...nativeProps}
